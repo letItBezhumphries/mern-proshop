@@ -6,7 +6,11 @@ dotenv.config();
 
 const connectDB = async () => {
   try {
-    const atlas = await mongoose.connect(process.env.MONGO_URI);
+    const atlas = await mongoose.connect(process.env.MONGO_URI, {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+      // useCreateIndex: true,
+    });
 
     console.log(`MongoDB Connected: ${atlas.connection.host}`.cyan.underline);
   } catch (error) {
