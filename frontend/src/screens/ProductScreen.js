@@ -16,7 +16,7 @@ import Message from "../components/Message";
 import { listProductDetails } from "../actions/productActions";
 
 const ProductScreen = () => {
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, product, error } = productDetails;
@@ -60,7 +60,7 @@ const ProductScreen = () => {
               </ListGroup.Item>
               <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
               <ListGroup.Item>
-                Description: ${product.description}
+                Description: {product.description}
               </ListGroup.Item>
             </ListGroup>
           </Col>
@@ -86,7 +86,7 @@ const ProductScreen = () => {
                 {product.countInStock > 0 && (
                   <ListGroup.Item>
                     <Row>
-                      <Col>Qty</Col>
+                      <Col>Qty:</Col>
                       <Col>
                         <Form.Control
                           as="select"

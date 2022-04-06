@@ -1,4 +1,4 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../constants/cartConstants.js";
+import { CART_ADD_ITEM } from "../constants/cartConstants.js";
 import axios from "axios";
 
 // can make use of getState here to access the state tree
