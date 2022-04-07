@@ -3,29 +3,34 @@ import dotenv from "dotenv";
 import connectDB from "../mongo/db.js";
 import colors from "colors";
 
-// ** Routes
+// ** Route imports
 import productRoutes from "../routes/productRoutes.js";
+import userRoutes from "../routes/userRoutes.js";
 
-// ** Middlewares
+/** Middleware imports */
 import { notFound, errorHandler } from "../middleware/errorMiddleware.js";
 
 dotenv.config();
 
 connectDB();
 
-const PORT = process.env.PORT || 5000;
 const app = express();
+
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
+/* routes */
 app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
 
 // fallback for 404 errors
 app.use(notFound);
-
 app.use(errorHandler);
+
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(
