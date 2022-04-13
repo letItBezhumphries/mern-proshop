@@ -6,6 +6,7 @@ import colors from "colors";
 // ** Route imports
 import productRoutes from "../routes/productRoutes.js";
 import userRoutes from "../routes/userRoutes.js";
+import orderRoutes from "../routes/orderRoutes.js";
 
 /** Middleware imports */
 import { notFound, errorHandler } from "../middleware/errorMiddleware.js";
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 /* routes */
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/orders", orderRoutes);
 
 // fallback for 404 errors
 app.use(notFound);
