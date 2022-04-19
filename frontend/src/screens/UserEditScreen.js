@@ -46,7 +46,7 @@ const UserEditScreen = () => {
         setIsAdmin(user.isAdmin);
       }
     }
-  }, [dispatch, userId, user, successUpdate]);
+  }, [dispatch, userId, user, successUpdate, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
