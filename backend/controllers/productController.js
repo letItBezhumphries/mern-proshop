@@ -24,4 +24,24 @@ const getProductById = asyncHandler(async (req, res) => {
   }
 });
 
-export { getProducts, getProductById };
+// @desc:  delete a single product
+// @route:  DELETE /api/products/:id
+// @access:  Private/Admin
+const deleteProduct = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+
+  // could put check here to see if the req.user._id is equal to the product.user._id
+  // to make sure only the admin that added the product would be able to delete that product
+  // the below check allows all admin to delete any product
+  if (product) {
+    await product.remove();
+    res.json({
+      message: `The product with an id: ${req.params.id} has successfully been removed`,
+    });
+  } else {
+    res.status(404);
+    throw new Error("Product not found");
+  }
+});
+
+export { getProducts, getProductById, deleteProduct };
