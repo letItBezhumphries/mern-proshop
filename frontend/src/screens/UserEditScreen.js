@@ -34,7 +34,7 @@ const UserEditScreen = () => {
       dispatch({
         type: USER_UPDATE_RESET,
       });
-      navigate("admin/userlist");
+      navigate("/admin/userlist");
     } else {
       // successUpdate is not true
       // if the user.name doesn't exist or match the url
