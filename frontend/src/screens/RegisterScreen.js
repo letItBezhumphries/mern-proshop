@@ -22,7 +22,7 @@ const RegisterScreen = () => {
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
-  console.log("redirect:", redirect);
+  // console.log("redirect:", redirect);
 
   // in order to redirect if we are already logged in make use of useEffect
   useEffect(() => {
