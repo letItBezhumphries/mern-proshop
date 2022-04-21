@@ -3,6 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import connectDB from "../mongo/db.js";
 import colors from "colors";
+import morgan from "morgan";
 
 // ** Route imports
 import productRoutes from "../routes/productRoutes.js";
@@ -18,6 +19,10 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 
 app.use(express.json());
 
