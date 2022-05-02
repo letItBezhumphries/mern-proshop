@@ -21,6 +21,7 @@ import {
   PRODUCT_TOP_SUCCESS,
   PRODUCT_TOP_FAIL,
 } from "../constants/productConstants.js";
+import { logout } from "./userActions";
 import axios from "axios";
 
 export const listProducts =
@@ -29,13 +30,14 @@ export const listProducts =
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
 
-      console.log("inside the listProducts action, keyword:", keyword);
-
       const { data } = await axios.get(
         `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
       );
 
-      dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
+      dispatch({
+        type: PRODUCT_LIST_SUCCESS,
+        payload: data,
+      });
     } catch (error) {
       dispatch({
         type: PRODUCT_LIST_FAIL,
@@ -53,7 +55,10 @@ export const listProductDetails = (id) => async (dispatch) => {
 
     const { data } = await axios.get(`/api/products/${id}`);
 
-    dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
+    dispatch({
+      type: PRODUCT_DETAILS_SUCCESS,
+      payload: data,
+    });
   } catch (error) {
     dispatch({
       type: PRODUCT_DETAILS_FAIL,
@@ -91,6 +96,9 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
+    }
     dispatch({
       type: PRODUCT_DELETE_FAIL,
       payload: message,
